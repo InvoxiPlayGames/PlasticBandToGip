@@ -250,7 +250,7 @@ typedef struct _XInputRockBandGuitarState
 
     bool start : 1;
     bool back : 1;
-    bool soloFlag : 1;
+    bool solo : 1;
     bool : 1;
 
     bool orange : 1;

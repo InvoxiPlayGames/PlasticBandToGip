@@ -13,6 +13,29 @@ inline void SetDpadFromHid(GipGuitarState* gip, BYTE dpad) {
 	gip->dpadLeft = dpad >= 5 && dpad <= 7;
 }
 
+inline void SetFretsFromFlags(GipGuitarState* gip, bool green, bool red, bool yellow, bool blue, bool orange, bool solo) {
+	gip->greenFlag = green;
+	gip->redFlag = red;
+	gip->yellowFlag = yellow;
+	gip->blueFlag = blue;
+	gip->orangeFlag = orange;
+	gip->soloFlag = solo;
+
+	if (solo) {
+		gip->soloGreen = green;
+		gip->soloRed = red;
+		gip->soloYellow = yellow;
+		gip->soloBlue = blue;
+		gip->soloOrange = orange;
+	} else {
+		gip->green = green;
+		gip->red = red;
+		gip->yellow = yellow;
+		gip->blue = blue;
+		gip->orange = orange;
+	}
+}
+
 extern "C" {
 
 	__declspec(dllexport) void PS3Wii_RockBand_ToGip(const BYTE* ps3rb_buf, BYTE* gip_buf) {
@@ -22,11 +45,7 @@ extern "C" {
 		// cram the ps button into an unused bit
 		gip->unused = ps3rb->ps;
 
-		gip->green = gip->greenFlag = ps3rb->green;
-		gip->red = gip->redFlag = ps3rb->red;
-		gip->yellow = gip->yellowFlag = ps3rb->yellow;
-		gip->blue = gip->blueFlag = ps3rb->blue;
-		gip->orange = gip->orangeFlag = ps3rb->orange;
+		SetFretsFromFlags(gip, ps3rb->green, ps3rb->red, ps3rb->yellow, ps3rb->blue, ps3rb->orange, ps3rb->solo);
 
 		gip->menu = ps3rb->start;
 		gip->view = ps3rb->select;
@@ -158,11 +177,7 @@ extern "C" {
 		// cram the guide button into an unused bit
 		gip->unused = x360rb->guide;
 
-		gip->green = gip->greenFlag = x360rb->green;
-		gip->red = gip->redFlag = x360rb->red;
-		gip->yellow = gip->yellowFlag = x360rb->yellow;
-		gip->blue = gip->blueFlag = x360rb->blue;
-		gip->orange = gip->orangeFlag = x360rb->orange;
+		SetFretsFromFlags(gip, x360rb->green, x360rb->red, x360rb->yellow, x360rb->blue, x360rb->orange, x360rb->solo);
 
 		gip->menu = x360rb->start;
 		gip->view = x360rb->back;
