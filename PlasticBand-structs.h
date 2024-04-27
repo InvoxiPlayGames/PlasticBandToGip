@@ -301,4 +301,29 @@ typedef struct _XInputGuitarHeroGuitarState
     int16_t tilt_accelY;
 } XInputGuitarHeroGuitarState;
 
+typedef struct _RaphnetGuitarState {
+    uint8_t reportId;
+
+    uint16_t joyX;
+    uint16_t joyY;
+
+    uint16_t unused;
+    uint16_t slider;
+    uint16_t unused2;
+    uint16_t whammy;
+
+    uint8_t green : 1;
+    uint8_t red : 1;
+    uint8_t yellow : 1;
+    uint8_t blue : 1;
+
+    uint8_t orange : 1;
+    uint8_t up : 1;
+    uint8_t plus : 1;
+    uint8_t minus : 1;
+
+    uint8_t down : 1;
+    uint8_t : 7;
+} RaphnetGuitarState;
+
 __pragma(pack(pop))

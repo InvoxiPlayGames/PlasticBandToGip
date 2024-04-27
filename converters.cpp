@@ -218,6 +218,25 @@ extern "C" {
 		gip->dpadRight = x360gh->dpadRight;
 	}
 
+	__declspec(dllexport) void Raphnet_GuitarHero_ToGip(const BYTE* raph_buf, BYTE* gip_buf) {
+		RaphnetGuitarState* raph = (RaphnetGuitarState*)raph_buf;
+		GipGuitarState* gip = (GipGuitarState*)gip_buf;
+
+		gip->green = gip->greenFlag = raph->green;
+		gip->red = gip->redFlag = raph->red;
+		gip->yellow = gip->yellowFlag = raph->yellow;
+		gip->blue = gip->blueFlag = raph->blue;
+		gip->orange = gip->orangeFlag = raph->orange;
+
+		gip->menu = raph->plus;
+		gip->view = raph->minus;
+
+		gip->whammy = X360_WHAMMY_TO_GIP_WHAMMY(raph->whammy);
+
+		gip->dpadStrumUp = raph->up;
+		gip->dpadStrumDown = raph->down;
+	}
+
 	// TODO: All of these
 
 	/*
