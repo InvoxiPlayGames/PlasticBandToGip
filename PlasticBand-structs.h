@@ -240,4 +240,65 @@ typedef struct _PS4RockBandGuitarState {
     uint8_t unused5[26];
     uint32_t crc32;
 } PS4RockBandGuitarState;
+
+typedef struct _XInputRockBandGuitarState
+{
+    bool dpadStrumUp : 1;
+    bool dpadStrumDown : 1;
+    bool dpadLeft : 1;
+    bool dpadRight : 1;
+
+    bool start : 1;
+    bool back : 1;
+    bool soloFlag : 1;
+    bool : 1;
+
+    bool orange : 1;
+    bool : 1;
+    bool guide : 1;
+    bool : 1;
+
+    bool green : 1;
+    bool red : 1;
+    bool blue : 1;
+    bool yellow : 1;
+
+    uint8_t pickupSwitch;
+    uint8_t unused1;
+    int16_t calibrationSensor;
+    int16_t unused2;
+    int16_t whammy;
+    int16_t tilt;
+} XInputRockBandGuitarState;
+
+typedef struct _XInputGuitarHeroGuitarState
+{
+    bool dpadStrumUp : 1;
+    bool dpadStrumDown : 1;
+    bool dpadLeft : 1;
+    bool dpadRight : 1;
+
+    bool start : 1;
+    bool back : 1;
+    bool : 1;
+    bool : 1;
+
+    bool orange : 1;
+    bool pedal : 1;
+    bool guide : 1;
+    bool : 1;
+
+    bool green : 1;
+    bool red : 1;
+    bool blue : 1;
+    bool yellow : 1;
+
+    uint8_t accelZ;
+    uint8_t accelX;
+    int16_t touchBar;
+    int16_t unused;
+    int16_t whammy;
+    int16_t tilt_accelY;
+} XInputGuitarHeroGuitarState;
+
 __pragma(pack(pop))

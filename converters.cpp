@@ -145,6 +145,64 @@ extern "C" {
 		SetDpadFromHid(gip, ps4rb->dpad_strum);
 	}
 
+	// -32768-32767 -> 0-65536 -> 0-255
+	#define X360_WHAMMY_TO_GIP_WHAMMY(whammy) ((uint16_t)((whammy) ^ 0x8000) >> 8)
+
+	// Ignore downward tilt, convert remaining 0-32767 to 0-255
+	#define X360_TILT_TO_GIP_TILT(tilt) ((tilt) > 0 ? (tilt) >> 7 : 0)
+
+	__declspec(dllexport) void XInput_RockBand_ToGip(const BYTE* xinput_buf, BYTE* gip_buf) {
+		XInputRockBandGuitarState* x360rb = (XInputRockBandGuitarState*)xinput_buf;
+		GipGuitarState* gip = (GipGuitarState*)gip_buf;
+
+		// cram the guide button into an unused bit
+		gip->unused = x360rb->guide;
+
+		gip->green = gip->greenFlag = x360rb->green;
+		gip->red = gip->redFlag = x360rb->red;
+		gip->yellow = gip->yellowFlag = x360rb->yellow;
+		gip->blue = gip->blueFlag = x360rb->blue;
+		gip->orange = gip->orangeFlag = x360rb->orange;
+
+		gip->menu = x360rb->start;
+		gip->view = x360rb->back;
+
+		gip->whammy = X360_WHAMMY_TO_GIP_WHAMMY(x360rb->whammy);
+		gip->tilt = X360_TILT_TO_GIP_TILT(x360rb->tilt);
+
+		gip->dpadStrumUp = x360rb->dpadStrumUp;
+		gip->dpadStrumDown = x360rb->dpadStrumDown;
+		gip->dpadLeft = x360rb->dpadLeft;
+		gip->dpadRight = x360rb->dpadRight;
+
+		// TODO: solo buttons and effects slider. unused in festival but would be fun
+	}
+
+	__declspec(dllexport) void PS3_GuitarHero_ToGip(const BYTE* xinput_buf, BYTE* gip_buf) {
+		XInputGuitarHeroGuitarState* x360gh = (XInputGuitarHeroGuitarState*)xinput_buf;
+		GipGuitarState* gip = (GipGuitarState*)gip_buf;
+
+		// cram the guide button into an unused bit
+		gip->unused = x360gh->guide;
+
+		gip->green = gip->greenFlag = x360gh->green;
+		gip->red = gip->redFlag = x360gh->red;
+		gip->yellow = gip->yellowFlag = x360gh->yellow;
+		gip->blue = gip->blueFlag = x360gh->blue;
+		gip->orange = gip->orangeFlag = x360gh->orange;
+
+		gip->menu = x360gh->start;
+		gip->view = x360gh->back;
+
+		gip->whammy = X360_WHAMMY_TO_GIP_WHAMMY(x360gh->whammy);
+		gip->tilt = X360_TILT_TO_GIP_TILT(x360gh->tilt_accelY);
+
+		gip->dpadStrumUp = x360gh->dpadStrumUp;
+		gip->dpadStrumDown = x360gh->dpadStrumDown;
+		gip->dpadLeft = x360gh->dpadLeft;
+		gip->dpadRight = x360gh->dpadRight;
+	}
+
 	// TODO: All of these
 
 	/*
