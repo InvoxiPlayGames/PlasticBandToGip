@@ -1,6 +1,18 @@
 #include <Windows.h>
 #include "PlasticBand-structs.h"
 
+inline void SetDpadFromHid(GipGuitarState* gip, BYTE dpad) {
+    //     0
+    //   7   1
+    // 6       2
+    //   5   3
+    //     4
+	gip->dpadStrumUp = dpad == 7 || dpad <= 1;
+	gip->dpadRight = dpad >= 1 && dpad <= 3;
+	gip->dpadStrumDown = dpad >= 3 && dpad <= 5;
+	gip->dpadLeft = dpad >= 5 && dpad <= 7;
+}
+
 extern "C" {
 
 	__declspec(dllexport) void PS3Wii_RockBand_ToGip(const BYTE* ps3rb_buf, BYTE* gip_buf) {
@@ -22,10 +34,7 @@ extern "C" {
 		gip->whammy = ps3rb->whammy;
 		gip->tilt = ps3rb->tilt ? 0xFF : 0x00;
 
-		gip->dpadLeft = ps3rb->dpad_strum == 6;
-		gip->dpadRight = ps3rb->dpad_strum == 2;
-		gip->dpadStrumUp = ps3rb->dpad_strum == 0;
-		gip->dpadStrumDown = ps3rb->dpad_strum == 4;
+		SetDpadFromHid(gip, ps3rb->dpad_strum);
 
 		// TODO: solo buttons and effects slider. unused in festival but would be fun
 	}
@@ -49,10 +58,7 @@ extern "C" {
 		gip->whammy = san->whammy;
 		gip->tilt = san->tilt;
 
-		gip->dpadLeft = san->dpad_strum == 6;
-		gip->dpadRight = san->dpad_strum == 2;
-		gip->dpadStrumUp = san->dpad_strum == 0;
-		gip->dpadStrumDown = san->dpad_strum == 4;
+		SetDpadFromHid(gip, san->dpad_strum);
 
 		// TODO: solo buttons and effects slider. unused in festival but would be fun
 	}
@@ -76,10 +82,7 @@ extern "C" {
 		gip->whammy = san->whammy;
 		gip->tilt = san->tilt;
 
-		gip->dpadLeft = san->dpad_strum == 6;
-		gip->dpadRight = san->dpad_strum == 2;
-		gip->dpadStrumUp = san->dpad_strum == 0;
-		gip->dpadStrumDown = san->dpad_strum == 4;
+		SetDpadFromHid(gip, san->dpad_strum);
 
 		// TODO: solo buttons and effects slider. unused in festival but would be fun
 	}
@@ -103,10 +106,7 @@ extern "C" {
 		gip->tilt = ps3gh->tilt_accelX > 0x300 ? 0xFF : 0x00;
 		gip->whammy = ps3gh->whammy;
 
-		gip->dpadLeft = ps3gh->dpad_strum == 6;
-		gip->dpadRight = ps3gh->dpad_strum == 2;
-		gip->dpadStrumUp = ps3gh->dpad_strum == 0;
-		gip->dpadStrumDown = ps3gh->dpad_strum == 4;
+		SetDpadFromHid(gip, ps3gh->dpad_strum);
 	}
 
 	__declspec(dllexport) void PS4_RockBand_ToGip(const BYTE* ps4rb_buf, BYTE* gip_buf) {
@@ -142,10 +142,7 @@ extern "C" {
 		gip->whammy = ps4rb->whammy;
 		gip->pickup = ps4rb->pickup;
 
-		gip->dpadLeft = ps4rb->dpad_strum == 6;
-		gip->dpadRight = ps4rb->dpad_strum == 2;
-		gip->dpadStrumUp = ps4rb->dpad_strum == 0;
-		gip->dpadStrumDown = ps4rb->dpad_strum == 4;
+		SetDpadFromHid(gip, ps4rb->dpad_strum);
 	}
 
 	// TODO: All of these
