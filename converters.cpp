@@ -193,7 +193,7 @@ extern "C" {
 		// TODO: solo buttons and effects slider. unused in festival but would be fun
 	}
 
-	__declspec(dllexport) void PS3_GuitarHero_ToGip(const BYTE* xinput_buf, BYTE* gip_buf) {
+	__declspec(dllexport) void XInput_GuitarHero_ToGip(const BYTE* xinput_buf, BYTE* gip_buf) {
 		XInputGuitarHeroGuitarState* x360gh = (XInputGuitarHeroGuitarState*)xinput_buf;
 		GipGuitarState* gip = (GipGuitarState*)gip_buf;
 
