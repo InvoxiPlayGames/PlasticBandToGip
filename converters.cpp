@@ -275,18 +275,4 @@ extern "C" {
 		gip->dpadStrumUp |= raph->joyY <= 4000;
 		gip->dpadStrumDown |= raph->joyY >= 28000;
 	}
-
-	// TODO: All of these
-
-	/*
-
-	__declspec(dllexport) void XInput_Guitar_ToGip(const BYTE* xinput_buf, BYTE* gip_buf) {
-
-	}
-
-	__declspec(dllexport) void XInput_Wireless_ToGip(const BYTE* xinput_buf, BYTE* gip_buf) {
-		XInput_Guitar_ToGip(xinput_buf + 4, gip_buf);
-	}
-	*/
-
 }
