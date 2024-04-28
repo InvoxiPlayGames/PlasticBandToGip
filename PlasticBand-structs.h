@@ -387,8 +387,9 @@ static_assert(sizeof(XInputGuitarHeroGuitarState) == 12);
 typedef struct _RaphnetGuitarState {
     uint8_t reportId;
 
-    uint16_t joyX;
-    uint16_t joyY;
+    // Centered at 16000
+    uint16_t joyX; // 0 = left, 32000 = right
+    uint16_t joyY; // 0 = up, 32000 = down
 
     uint16_t unused;
     uint16_t slider;

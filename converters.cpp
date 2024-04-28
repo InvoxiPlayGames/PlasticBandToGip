@@ -271,6 +271,9 @@ extern "C" {
 
 		gip->dpadStrumUp = raph->up;
 		gip->dpadStrumDown = raph->down;
+
+		gip->dpadStrumUp |= raph->joyY <= 4000;
+		gip->dpadStrumDown |= raph->joyY >= 28000;
 	}
 
 	// TODO: All of these
