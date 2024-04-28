@@ -45,7 +45,11 @@ typedef struct _GipGuitarState {
     uint8_t unknown2[4];
 } GipGuitarState;
 
+static_assert(sizeof(GipGuitarState) == 14);
+
 typedef struct _PS3RockBandGuitarState {
+    uint8_t reportId;
+
     bool blue : 1;
     bool green : 1;
     bool red : 1;
@@ -79,7 +83,11 @@ typedef struct _PS3RockBandGuitarState {
     int16_t unused3[4];
 } PS3RockBandGuitarState;
 
+static_assert(sizeof(PS3RockBandGuitarState) == 28);
+
 typedef struct _PS3GuitarHeroGuitarState {
+    uint8_t reportId;
+
     bool yellow : 1;
     bool green : 1;
     bool red : 1;
@@ -124,6 +132,8 @@ typedef struct _PS3GuitarHeroGuitarState {
     int16_t unused3;
 } PS3GuitarHeroGuitarState;
 
+static_assert(sizeof(PS3RockBandGuitarState) == 28);
+
 typedef struct _SantrollerRockBandGuitarState {
     uint8_t reportId;
 
@@ -157,6 +167,8 @@ typedef struct _SantrollerRockBandGuitarState {
     uint8_t tilt;
 } SantrollerRockBandGuitarState;
 
+static_assert(sizeof(SantrollerRockBandGuitarState) == 7);
+
 typedef struct _SantrollerGuitarHeroGuitarState {
     uint8_t reportId;
 
@@ -185,6 +197,8 @@ typedef struct _SantrollerGuitarHeroGuitarState {
     uint8_t tilt;
 } SantrollerGuitarHeroGuitarState;
 
+static_assert(sizeof(SantrollerGuitarHeroGuitarState) == 7);
+
 typedef struct _PS4RockBandGuitarState {
     uint8_t reportId;
 
@@ -209,6 +223,7 @@ typedef struct _PS4RockBandGuitarState {
     bool options : 1;
     bool soloFlag : 1;
     bool p1 : 1;
+
     bool ps : 1;
     uint8_t : 7;
 
@@ -237,9 +252,10 @@ typedef struct _PS4RockBandGuitarState {
     bool soloOrange : 1;
     bool : 3;
 
-    uint8_t unused5[26];
-    uint32_t crc32;
+    uint8_t unused5[16];
 } PS4RockBandGuitarState;
+
+static_assert(sizeof(PS4RockBandGuitarState) == 64);
 
 typedef struct _XInputRockBandGuitarState
 {
@@ -271,6 +287,8 @@ typedef struct _XInputRockBandGuitarState
     int16_t tilt;
 } XInputRockBandGuitarState;
 
+static_assert(sizeof(XInputRockBandGuitarState) == 12);
+
 typedef struct _XInputGuitarHeroGuitarState
 {
     bool dpadStrumUp : 1;
@@ -301,6 +319,8 @@ typedef struct _XInputGuitarHeroGuitarState
     int16_t tilt_accelY;
 } XInputGuitarHeroGuitarState;
 
+static_assert(sizeof(XInputGuitarHeroGuitarState) == 12);
+
 typedef struct _RaphnetGuitarState {
     uint8_t reportId;
 
@@ -325,5 +345,7 @@ typedef struct _RaphnetGuitarState {
     uint8_t up : 1;
     uint8_t : 7;
 } RaphnetGuitarState;
+
+static_assert(sizeof(RaphnetGuitarState) == 15);
 
 __pragma(pack(pop))
