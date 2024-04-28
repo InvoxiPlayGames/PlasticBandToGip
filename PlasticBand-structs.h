@@ -23,8 +23,8 @@ typedef struct _GipGuitarState {
     bool soloFlag : 1;
     bool : 1;
 
-    uint8_t tilt;
     uint8_t whammy;
+    uint8_t tilt;
     uint8_t pickup;
 
     bool green : 1;
@@ -318,11 +318,11 @@ typedef struct _RaphnetGuitarState {
     uint8_t blue : 1;
 
     uint8_t orange : 1;
-    uint8_t up : 1;
+    uint8_t down : 1;
     uint8_t plus : 1;
     uint8_t minus : 1;
 
-    uint8_t down : 1;
+    uint8_t up : 1;
     uint8_t : 7;
 } RaphnetGuitarState;
 
