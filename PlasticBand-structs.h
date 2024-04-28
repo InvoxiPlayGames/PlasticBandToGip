@@ -257,6 +257,69 @@ typedef struct _PS4RockBandGuitarState {
 
 static_assert(sizeof(PS4RockBandGuitarState) == 64);
 
+typedef struct _PS5RockBandGuitarState
+{
+    uint8_t reportId;
+
+    uint8_t joystickX;
+    uint8_t joystickY;
+
+    uint8_t unused1[5];
+
+    //     0
+    //   7   1
+    // 6   8   2
+    //   5   3
+    //     4
+    uint8_t dpad_strum : 4;
+    bool blueFlag : 1;
+    bool greenFlag : 1;
+    bool redFlag : 1;
+    bool yellowFlag : 1;
+
+    bool orangeFlag : 1;
+    uint8_t : 3;
+    bool share : 1;
+    bool options : 1;
+    bool soloFlag : 1;
+    bool p1 : 1;
+
+    bool ps : 1;
+    uint8_t : 7;
+
+    uint8_t unused2;
+
+    uint32_t packetCounter; // uint32le_t
+
+    uint8_t unused3[25];
+
+    uint8_t whammy;
+    uint8_t tilt;
+
+    bool green : 1;
+    bool red : 1;
+    bool yellow : 1;
+    bool blue : 1;
+    bool orange : 1;
+    bool : 1;
+    bool : 1;
+    bool : 1;
+
+    bool soloGreen : 1;
+    bool soloRed : 1;
+    bool soloYellow : 1;
+    bool soloBlue : 1;
+    bool soloOrange : 1;
+    bool : 1;
+    bool : 1;
+    bool : 1;
+
+    uint8_t unused4[11];
+    uint64_t checksum;
+} PS5RockBandGuitarState;
+
+static_assert(sizeof(PS5RockBandGuitarState) == 64);
+
 typedef struct _XInputRockBandGuitarState
 {
     bool dpadStrumUp : 1;

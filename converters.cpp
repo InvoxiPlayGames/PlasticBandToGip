@@ -164,6 +164,42 @@ extern "C" {
 		SetDpadFromHid(gip, ps4rb->dpad_strum);
 	}
 
+	__declspec(dllexport) void PS5_RockBand_ToGip(const BYTE* ps5rb_buf, BYTE* gip_buf) {
+		PS5RockBandGuitarState* ps5rb = (PS5RockBandGuitarState*)ps5rb_buf;
+		GipGuitarState* gip = (GipGuitarState*)gip_buf;
+
+		// cram the ps button into an unused bit
+		gip->unused = ps5rb->ps;
+
+		gip->green = ps5rb->green;
+		gip->red = ps5rb->red;
+		gip->yellow = ps5rb->yellow;
+		gip->blue = ps5rb->blue;
+		gip->orange = ps5rb->orange;
+
+		gip->greenFlag = ps5rb->greenFlag;
+		gip->redFlag = ps5rb->redFlag;
+		gip->yellowFlag = ps5rb->yellowFlag;
+		gip->blueFlag = ps5rb->blueFlag;
+		gip->orangeFlag = ps5rb->orangeFlag;
+
+		gip->soloFlag = ps5rb->soloFlag;
+		gip->soloGreen = ps5rb->soloGreen;
+		gip->soloRed = ps5rb->soloRed;
+		gip->soloYellow = ps5rb->soloYellow;
+		gip->soloBlue = ps5rb->soloBlue;
+		gip->soloOrange = ps5rb->soloOrange;
+
+		gip->menu = ps5rb->options;
+		gip->view = ps5rb->share;
+
+		gip->tilt = ps5rb->tilt;
+		gip->whammy = ps5rb->whammy;
+		// gip->pickup = ps5rb->pickup; // No pickup switch on the Riffmaster
+
+		SetDpadFromHid(gip, ps5rb->dpad_strum);
+	}
+
 	// -32768-32767 -> 0-65536 -> 0-255
 	#define X360_WHAMMY_TO_GIP_WHAMMY(whammy) ((uint16_t)((whammy) ^ 0x8000) >> 8)
 
