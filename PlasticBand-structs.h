@@ -73,7 +73,8 @@ typedef struct _PS3RockBandGuitarState {
     // 6   8   2
     //   5   3
     //     4
-    uint8_t dpad_strum;
+    uint8_t dpad_strum : 4;
+    uint8_t : 4;
 
     uint8_t unused1[2];
     uint8_t whammy;
@@ -111,7 +112,8 @@ typedef struct _PS3GuitarHeroGuitarState {
     // 6    31   2
     //   5     3
     //      4
-    uint8_t dpad_strum;
+    uint8_t dpad_strum : 4;
+    uint8_t : 4;
 
     uint8_t unused1[2];
     uint8_t whammy;
@@ -160,7 +162,8 @@ typedef struct _SantrollerRockBandGuitarState {
     // 6   8   2
     //   5   3
     //     4
-    uint8_t dpad_strum;
+    uint8_t dpad_strum : 4;
+    uint8_t : 4;
 
     uint8_t whammy;
     uint8_t pickup;
@@ -190,7 +193,8 @@ typedef struct _SantrollerGuitarHeroGuitarState {
     // 6   8   2
     //   5   3
     //     4
-    uint8_t dpad_strum;
+    uint8_t dpad_strum : 4;
+    uint8_t : 4;
 
     uint8_t whammy;
     uint8_t tapBar;
